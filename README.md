@@ -2,7 +2,7 @@
 
 Repository with basic scripts for using the EEG Virtual Reality developed at GIPSA-lab [1]. The dataset files and their documentation are all available at 
 
-[https://...]()
+[https://sandbox.zenodo.org/record/261669/files/](https://sandbox.zenodo.org/record/261669/files/)
 
 The code of this repository was developed in **Python 3** using MOABB [2] and MNE-Python [3, 4] as tools for downloading and pre-processing the dataset. 
 
@@ -26,7 +26,7 @@ Note that you might want to create a *virtual environment* before doing all thes
 
 # References
 
-[1] Cattan et al. ...
+[1] Cattan et al. "Dataset of an EEG-based BCI experiment in Virtual Reality and on a Personal Computer" [DOI](https://hal.archives-ouvertes.fr/hal-02078533)
 
 [2] Jayaram and Barachant "MOABB: Trustworthy algorithm benchmarking for BCIs" [DOI](https://doi.org/10.1088/1741-2552/aadea0)
 
