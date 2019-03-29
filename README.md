@@ -2,7 +2,7 @@
 
 Repository with basic scripts for using the EEG Virtual Reality developed at GIPSA-lab [1]. The dataset files and their documentation are all available at 
 
-[https://sandbox.zenodo.org/record/261669/files/](https://sandbox.zenodo.org/record/261669/files/)
+[https://zenodo.org/record/2605205/](https://zenodo.org/record/2605205/)
 
 The code of this repository was developed in **Python 3** using MOABB [2] and MNE-Python [3, 4] as tools for downloading and pre-processing the dataset. 
 
