@@ -14,6 +14,7 @@ from pyriemann.classification import MDM
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import KFold
+from sklearn.externals import joblib
 
 from tqdm import tqdm
 
@@ -43,53 +44,59 @@ paradigm = P300()
 # loop to get scores for each subject
 nsubjects = 5
 
-scores = []
-for subject in tqdm(dataset.subject_list[:nsubjects]):
-	scores_subject = [subject]
-	for condition in ['VR', 'PC']:
+df = {}
+for tmax in [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
 
-		# define the dataset instance
-		if condition is 'VR':
-			dataset.VR = True
-			dataset.PC = False
-		elif condition is 'PC':
-			dataset.VR = False
-			dataset.PC = True
+	paradigm.tmax = tmax
 
-		# get the epochs and labels
-		X, labels, meta = paradigm.get_data(dataset, subjects=[subject])
-		labels = LabelEncoder().fit_transform(labels)
+	scores = []
+	for subject in tqdm(dataset.subject_list[:nsubjects]):
+		scores_subject = [subject]
+		for condition in ['VR', 'PC']:
 
-		kf = KFold(n_splits = 6)
-		repetitions = [1, 2]				
-		auc = []
+			# define the dataset instance
+			if condition is 'VR':
+				dataset.VR = True
+				dataset.PC = False
+			elif condition is 'PC':
+				dataset.VR = False
+				dataset.PC = True
 
-		blocks = np.arange(1, 12+1)
-		for train_idx, test_idx in kf.split(np.arange(12)):
+			# get the epochs and labels
+			X, labels, meta = paradigm.get_data(dataset, subjects=[subject])
+			labels = LabelEncoder().fit_transform(labels)
 
-			# split in training and testing blocks
-			X_training, labels_training, _ = get_block_repetition(X, labels, meta, blocks[train_idx], repetitions)
-			X_test, labels_test, _ = get_block_repetition(X, labels, meta, blocks[test_idx], repetitions)
+			kf = KFold(n_splits = 6)
+			repetitions = [1, 2]				
+			auc = []
 
-			# estimate the extended ERP covariance matrices with Xdawn
-			dict_labels = {'Target':1, 'NonTarget':0}
-			erpc = ERPCovariances(classes=[dict_labels['Target']])
-			erpc.fit(X_training, labels_training)
-			covs_training = erpc.transform(X_training)
-			covs_test = erpc.transform(X_test)
+			blocks = np.arange(1, 12+1)
+			for train_idx, test_idx in kf.split(np.arange(12)):
 
-			# get the AUC for the classification
-			clf = MDM()
-			clf.fit(covs_training, labels_training)
-			labels_pred = clf.predict(covs_test)
-			auc.append(roc_auc_score(labels_test, labels_pred))
+				# split in training and testing blocks
+				X_training, labels_training, _ = get_block_repetition(X, labels, meta, blocks[train_idx], repetitions)
+				X_test, labels_test, _ = get_block_repetition(X, labels, meta, blocks[test_idx], repetitions)
 
-		# stock scores
-		scores_subject.append(np.mean(auc))
+				# estimate the extended ERP covariance matrices with Xdawn
+				dict_labels = {'Target':1, 'NonTarget':0}
+				erpc = ERPCovariances(classes=[dict_labels['Target']], estimator='lwf')
+				erpc.fit(X_training, labels_training)
+				covs_training = erpc.transform(X_training)
+				covs_test = erpc.transform(X_test)
 
-	scores.append(scores_subject)
+				# get the AUC for the classification
+				clf = MDM()
+				clf.fit(covs_training, labels_training)
+				labels_pred = clf.predict(covs_test)
+				auc.append(roc_auc_score(labels_test, labels_pred))
 
-# print results
-df = pd.DataFrame(scores, columns=['subject', 'VR', 'PC'])
-print(df)
+			# stock scores
+			scores_subject.append(np.mean(auc))
 
+		scores.append(scores_subject)
+
+	# print results
+	df[tmax] = pd.DataFrame(scores, columns=['subject', 'VR', 'PC'])
+
+filename = './results.pkl'
+joblib.dump(df, filename)
