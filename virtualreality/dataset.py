@@ -8,8 +8,7 @@ from moabb.datasets import download as dl
 from scipy.io import loadmat
 import zipfile
 
-#VIRTUALREALITY_URL = 'https://zenodo.org/record/2605205/files/'
-VIRTUALREALITY_URL = 'https://zenodo.org/record/261669/files/'
+VIRTUALREALITY_URL = 'https://zenodo.org/record/2605205/files/'
 
 class VirtualReality(BaseDataset):
     '''
