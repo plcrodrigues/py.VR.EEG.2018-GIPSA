@@ -46,7 +46,7 @@ class VirtualReality(BaseDataset):
     VR.EEG.2018-GIPSA
     '''
 
-    def __init__(self, VR=True, PC=False):
+    def __init__(self, VR=True, PC=False, useMontagePosition=True):
         super().__init__(
             subjects=list(range(1, 20+1)),
             sessions_per_subject=1,
@@ -58,6 +58,7 @@ class VirtualReality(BaseDataset):
 
         self.VR = VR
         self.PC = PC
+        self.useMontagePosition = useMontagePosition
 
     def _get_single_subject_data(self, subject):
 
@@ -79,7 +80,7 @@ class VirtualReality(BaseDataset):
             X = np.concatenate([S, stim[:, None]], axis=1).T
 
             info = mne.create_info(ch_names=chnames + ['stim'], sfreq=512,
-                                   ch_types=chtypes, montage='standard_1020',
+                                   ch_types=chtypes, montage='standard_1020' if self.useMontagePosition else None,
                                    verbose=False)
 
             idx_stim = np.where(stim > 0)[0]
