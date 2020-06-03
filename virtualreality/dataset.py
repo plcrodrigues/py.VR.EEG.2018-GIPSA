@@ -1,10 +1,16 @@
+try:
+    from moabb.datasets.base import BaseDataset
+    from moabb.datasets import download as dl
+except:
+    from ..moabb.datasets.base import BaseDataset
+    from ..moabb.datasets import download as dl
+
 import mne
 import os
 import glob
 import numpy as np
 import datetime as dt
-from moabb.datasets.base import BaseDataset
-from moabb.datasets import download as dl
+
 from scipy.io import loadmat
 import zipfile
 
