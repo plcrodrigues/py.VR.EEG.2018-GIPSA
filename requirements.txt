@@ -2,8 +2,8 @@ pyriemann>=0.2.6
 scipy>=1.8
 setuptools>=40.6.3
 mne==0.24.1
-pandas==0.23.0
+pandas==1.5.3
 numpy>=1.13.3
-tqdm==4.28.1
+tqdm==4.65.0
 scikit_learn>=0.23
 pooch==1.7.0
