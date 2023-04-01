@@ -136,7 +136,7 @@ setup(
     # https://packaging.python.org/en/latest/requirements.html
     setup_requires=[
         "setuptools>=40.6.3",
-        "numpy==1.24.2"],
+        "numpy==1.20.3"],
     install_requires=[
             "mne==0.24.1",
             "pyriemann>=0.2.6",
