@@ -145,7 +145,6 @@ setup(
             "matplotlib>=3.4.3",
             "tqdm==4.65.0",
             "pandas==1.5.3",
-            "moabb==0.4.6",
             "pooch==1.7.0"],
 
     # List additional groups of dependencies here (e.g. development
