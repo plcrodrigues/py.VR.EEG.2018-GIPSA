@@ -145,8 +145,8 @@ setup(
             "scipy>=1.8",
             "scikit_learn>=0.23",
             "matplotlib>=3.4.3",
-            "tqdm==4.28.1",
-            "pandas==0.23.0",
+            "tqdm==4.65.0",
+            "pandas==1.5.3",
             "pooch==1.7.0"],
 
     # List additional groups of dependencies here (e.g. development
