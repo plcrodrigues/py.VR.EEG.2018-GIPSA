@@ -107,10 +107,8 @@ setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
 
     # This field adds keywords for your project which will appear on the
@@ -147,6 +145,7 @@ setup(
             "matplotlib>=3.4.3",
             "tqdm==4.65.0",
             "pandas==1.5.3",
+            "moabb==0.4.6",
             "pooch==1.7.0"],
 
     # List additional groups of dependencies here (e.g. development
