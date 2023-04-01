@@ -55,10 +55,10 @@ for tmax in [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]:
 		for condition in ['VR', 'PC']:
 
 			# define the dataset instance
-			if condition is 'VR':
+			if condition == 'VR':
 				dataset.VR = True
 				dataset.PC = False
-			elif condition is 'PC':
+			elif condition == 'PC':
 				dataset.VR = False
 				dataset.PC = True
 
