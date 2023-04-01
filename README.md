@@ -4,7 +4,8 @@ Repository with basic scripts for using the EEG Virtual Reality developed at GIP
 
 [https://zenodo.org/record/2605205/](https://zenodo.org/record/2605205/)
 
-The code of this repository was developed in **Python 3** using MOABB [2] and MNE-Python [3, 4] as tools for downloading and pre-processing the dataset. 
+The code of this repository was developed in Python 3 using MOABB [2] and MNE-Python [3, 4] as tools for downloading and pre-processing the dataset.
+It is compatible with **Python 3.8 and 3.9".
 
 To make things work, you will need to install MOABB. It can be done by following the instructions at the project's GitHub [link](https://github.com/NeuroTechX/moabb).
 
