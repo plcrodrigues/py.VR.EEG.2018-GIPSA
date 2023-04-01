@@ -1,10 +1,4 @@
-try:
-    from moabb.datasets.base import BaseDataset
-    from moabb.datasets import download as dl
-except:
-    from ..moabb.datasets.base import BaseDataset
-    from ..moabb.datasets import download as dl
-
+from . import download as dl
 import mne
 import os
 import glob
