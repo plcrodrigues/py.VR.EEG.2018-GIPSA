@@ -1,3 +1,4 @@
+from moabb.datasets.base import BaseDataset
 from . import download as dl
 import mne
 import os
