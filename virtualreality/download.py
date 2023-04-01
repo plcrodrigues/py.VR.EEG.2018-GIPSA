@@ -5,17 +5,15 @@ import os
 from os import path as op
 
 from mne.datasets.utils import _get_path, _do_path_update
-from mne.utils import _fetch_file, _url_to_local_path, verbose
-
+from mne.utils import _url_to_local_path, verbose
+from pooch import retrieve
 
 @verbose
 def data_path(url, sign, path=None, force_update=False, update_path=True,
               verbose=None):
     """Get path to local copy of given dataset URL.
-
     This is a low-level function useful for getting a local copy of a
     remote dataset
-
     Parameters
     ----------
     url : str
@@ -36,13 +34,11 @@ def data_path(url, sign, path=None, force_update=False, update_path=True,
         config to the given path. If None, the user is prompted.
     verbose : bool, str, int, or None
         If not None, override default verbose level (see :func:`mne.verbose`).
-
     Returns
     -------
     path : list of str
         Local path to the given data file. This path is contained inside a list
         of length one, for compatibility.
-
     """  # noqa: E501
     sign = sign.upper()
     key = 'MNE_DATASETS_{:s}_PATH'.format(sign)
@@ -55,9 +51,11 @@ def data_path(url, sign, path=None, force_update=False, update_path=True,
             os.remove(destination)
         if not op.isdir(op.dirname(destination)):
             os.makedirs(op.dirname(destination))
-        _fetch_file(url, destination, print_destination=False)
+        retrieve(
+          url, None, fname=op.basename(url), path=op.dirname(destination)
+        )
 
     # Offer to update the path
     _do_path_update(path, update_path, key, sign)
-    
+
     return destination
