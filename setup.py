@@ -136,7 +136,18 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    # install_requires=['peppercorn'],  # Optional
+    setup_requires=[
+        "setuptools>=40.6.3",
+        "numpy>=1.13.3"],
+    install_requires=[
+            "mne==0.24.1",
+            "pyriemann>=0.2.6",
+            "scipy>=1.8",
+            "scikit_learn>=0.23",
+            "matplotlib>=3.4.3",
+            "tqdm==4.28.1",
+            "pandas==0.23.0",
+            "pooch==1.7.0"],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
