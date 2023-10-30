@@ -1,3 +1,7 @@
+# DEPRECATION NOTICE
+
+This dataset is now included in [moabb](https://moabb.neurotechx.com/docs/generated/moabb.datasets.Cattan2019_VR.html#moabb.datasets.Cattan2019_VR)
+
 # EEG Virtual Reality dataset
 
 Repository with basic scripts for using the EEG Virtual Reality developed at GIPSA-lab [1]. The dataset files and their documentation are all available at 
